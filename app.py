@@ -7,6 +7,12 @@ Created on Fri Nov 26 18:59:39 2021
 
 from flask import Flask,jsonify,request
 app = Flask(__name__)
+from flask_cors import CORS, cross_origin
+
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
+
 
 def recur_fibo(n):
    if n <= 1:
@@ -33,6 +39,7 @@ def sort_fib_list(fib_list):
 
 
 @app.route("/fibonacci", methods=["POST"])
+@cross_origin()
 def starting_url():
     print(request.json)
     data = request.json
@@ -55,6 +62,7 @@ def starting_url():
 
 
 @app.route('/')
+@cross_origin()
 def Index():
     return "Welcome to the demo app"
 
