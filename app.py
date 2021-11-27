@@ -6,9 +6,14 @@ Created on Fri Nov 26 18:59:39 2021
 """
 
 # importing all the required libs
+import json
+
 from flask import Flask, jsonify, request, render_template
 # to avoid Cross-Origin Resource Sharing error
 from flask_cors import CORS, cross_origin
+# requests module to sent POST request to the API
+import requests
+
 
 # initialising a flask web server instance
 app = Flask(__name__)
@@ -17,6 +22,8 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
+# API URL
+url = "http://168.138.176.208/fibonacci";
 
 def fibonacci(n):
     # the function to compute fibonacci sequence
@@ -56,8 +63,39 @@ def sort_accumulated_numbers(fib_list):
 @cross_origin()
 def Index():
     # to provide a UI for introduction to the API
-    return "hello"
-    # return render_template("index.html")
+    return render_template('index.html',
+                            fibonacci_values = '',
+                            sorted_values = '',
+                            element_length='_')
+
+@app.route("/call_api", methods=['POST'])
+def call_api():
+    elements = request.form['elements']
+    elements = int(elements)
+
+
+
+    headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
+    json_dict = {'elements': elements }
+
+    response = requests.post(url, json=json_dict,headers=headers)
+    response = response.json()
+
+
+    fibonacci_values = response['fibonacci']
+    sorted_values = response['sorted']
+
+    #print(x)
+
+    return  render_template('index.html',
+                            fibonacci_values = fibonacci_values,
+                            sorted_values = sorted_values,
+                            element_length=elements)
+
+
+
+
+
 
 
 @app.route("/fibonacci", methods=["POST"])
@@ -94,5 +132,8 @@ def business_logic():
 # if the program is being run directly
 # and not being called by other program
 if __name__ == "__main__":
-   # to run the program at flask web server
-    app.run(host="0.0.0.0", port=80)
+    # to run the program at flask web server
+    app.run(debug=True,host='0.0.0.0', port=80)
+
+
+#----end -----

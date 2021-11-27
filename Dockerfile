@@ -7,4 +7,4 @@ ADD . /my-flask-app
 # run pip to install the dependencies of the flask app
 RUN pip3 install -r requirements.txt
 # define the command to start the container
-CMD ["python","app.py"]
+CMD ["python3","app.py"]
