@@ -70,32 +70,41 @@ def Index():
 
 @app.route("/call_api", methods=['POST'])
 def call_api():
+    '''
+    this function just assist to demostrate the
+    REST web service functionality. This function
+    will be called when the form is submitted.
+    The elements value will be packed in a json
+    payload and send in a POST request to the
+    fibonnaci REST web service (which is this same
+    application).
+
+    The response is then shown on UI for user to see
+    '''
+
+    # received data from form
     elements = request.form['elements']
     elements = int(elements)
 
-
-
+    # header dict to make appropriate POST request
     headers = {'Content-type': 'application/json', 'Accept': 'application/json'}
+
+    # pack data in a dictionary
     json_dict = {'elements': elements }
 
+    # make a post request using 'requests' module
     response = requests.post(url, json=json_dict,headers=headers)
     response = response.json()
 
-
+    # get the various parts from JSON pkt
     fibonacci_values = response['fibonacci']
     sorted_values = response['sorted']
 
-    #print(x)
-
+    # display data on webpage
     return  render_template('index.html',
                             fibonacci_values = fibonacci_values,
                             sorted_values = sorted_values,
                             element_length=elements)
-
-
-
-
-
 
 
 @app.route("/fibonacci", methods=["POST"])
@@ -133,7 +142,7 @@ def business_logic():
 # and not being called by other program
 if __name__ == "__main__":
     # to run the program at flask web server
-    app.run(debug=True,host='0.0.0.0', port=80)
+    app.run(debug=True)
 
 
 #----end -----
