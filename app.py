@@ -142,11 +142,8 @@ def business_logic():
 # and not being called by other program
 if __name__ == "__main__":
     # to run the program at flask web server
-<<<<<<< HEAD
-    app.run(debug=True)
-=======
-    app.run(debug=True,host='0.0.0.0')
->>>>>>> 99f160765bbce5cd54a0fd180a82ff6c5aba0831
+    app.run(host='0.0.0.0',port=80)
+
 
 
 #----end -----
