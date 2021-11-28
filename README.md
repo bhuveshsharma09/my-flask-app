@@ -31,12 +31,33 @@ Link of the global API (hosted on OCI): http://168.138.176.208/ ;
 
 Link to call API in your program: http://168.138.176.208/fibonacci
 
+# Build and Run Docker image using Dockerfile
+the docker file helps to build an image of program which can later be run in a container.
+To do so, please follow the commands
+```
+$ git clone https://github.com/bhuveshsharma09/my-flask-app.git
+
+### build docker image
+
+$ docker image build -t my-flask-app .
+
+### check if the image has been build successfully
+
+$ docker image ls
+
+### run the image in a container
+
+$ docker run -d -p 80:80 my-flask-app
+
+```
+
+
 # How to use 
 ### clone the repo
 ```
 $ git clone https://github.com/bhuveshsharma09/my-flask-app.git
 ```
-### change the working directory to resumeit
+### change the working directory to my-flask-app
 ```
 $ cd my-flask-app
 ```
