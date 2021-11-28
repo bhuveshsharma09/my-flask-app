@@ -1,4 +1,6 @@
 # Python and Flask REST web service  http://168.138.176.208/ 
+![image](https://user-images.githubusercontent.com/62707309/143732407-59487492-d04c-4a55-9c9a-aeadf2cd00cf.png)
+
 ### Functionality
 The web service takes in a numerical value between 1 to 100, and returns the Fibonacci sequence, as well as a sequence that is sorted using the following conditions:
 * Even numbers first, in descending order
